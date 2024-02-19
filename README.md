@@ -5,7 +5,7 @@ Forked from https://github.com/partoftheworlD/MyFriendPedro_autosplitter. Fixed 
 Activate the auto splitter from LiveSplit's splits editor.
 
 ## Features
-Starts settings are available.  
+Start settings are available.  
 Splits settings are available.  
 Resets the timer when returning to the main menu.  
 Syncs to in-game time.
