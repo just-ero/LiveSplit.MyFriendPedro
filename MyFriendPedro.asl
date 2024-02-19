@@ -1,142 +1,143 @@
-state("My Friend Pedro - Blood Bullets Bananas", "Steam") {
-    int iLevel      : "mono.dll", 0x264110, 0xA8, 0x18, 0x78;
-}
+state("My Friend Pedro - Blood Bullets Bananas") {}
 
-state("My Friend Pedro - Blood Bullets Bananas", "Non-Steam") {
-    int iLevel      : "mono.dll", 0x264110, 0x70, 0x18, 0x78;
-}
+startup
+{
+    Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
+    vars.Helper.GameName = "My Friend Pedro";
 
-startup {
-    vars.levels = new Dictionary<int, Tuple<string, string>>{ {3, Tuple.Create("TutorialLevel_1","Tutorial 1")},
-                                                              {4, Tuple.Create("TutorialLevel_2","Tutorial 2")},
-                                                              {5, Tuple.Create("TutorialLevel_3","Tutorial 3")},
-                                                              {6, Tuple.Create("OldTownLevel_1","Old Town 1")},
-                                                              {7, Tuple.Create("OldTownLevel_2","Old Town 2")},
-                                                              {8, Tuple.Create("OldTownLevel_3","Old Town 3")},
-                                                              {9, Tuple.Create("OldTownLevel_4","Old Town 4")},
-                                                              {10,Tuple.Create("OldTownLevel_5","Old Town 5")},
-                                                              {11,Tuple.Create("OldTownLevel_6","Old Town 6")},
-                                                              {12,Tuple.Create("OldTownLevel_7","Old Town 7")},
-                                                              {13,Tuple.Create("OldTownLevel_7_5","Old Town 7.1 level with taking a bike")},
-                                                              {14,Tuple.Create("OldTownLevel_8","Old Town 8")},
-                                                              {15,Tuple.Create("DistrictNullLevel_Cutscene","District Null cutscene")},
-                                                              {16,Tuple.Create("DistrictNullLevel_1","District Null 1")},
-                                                              {17,Tuple.Create("DistrictNullLevel_2","District Null 2")},
-                                                              {18,Tuple.Create("DistrictNullLevel_3","District Null 3")},
-                                                              {19,Tuple.Create("DistrictNullLevel_4","District Null 4")},
-                                                              {20,Tuple.Create("DistrictNullLevel_5","District Null 5")},
-                                                              {21,Tuple.Create("DistrictNullLevel_6","District Null 6")},
-                                                              {22,Tuple.Create("DistrictNullLevel_7","District Null 7")},
-                                                              {23,Tuple.Create("DistrictNullLevel_8","District Null 8")},
-                                                              {24,Tuple.Create("DistrictNullLevel_9","District Null 9")},
-                                                              {25,Tuple.Create("PedroWorldLevel_1","Pedro's World 1")},
-                                                              {26,Tuple.Create("PedroWorldLevel_2","Pedro's World 2")},
-                                                              {27,Tuple.Create("PedroWorldLevel_3","Pedro's World 3")},
-                                                              {28,Tuple.Create("PedroWorldLevel_4","Pedro's World 4")},
-                                                              {29,Tuple.Create("PedroWorldLevel_CutScene","Pedro's World End Level cutscene")},
-                                                              {30,Tuple.Create("SewerLevel_CutScene","The Sewer cutscene")},
-                                                              {31,Tuple.Create("SewerLevel_1","The Sewer 1")},
-                                                              {32,Tuple.Create("SewerLevel_2","The Sewer 2")},
-                                                              {33,Tuple.Create("SewerLevel_3","The Sewer 3")},
-                                                              {34,Tuple.Create("SewerLevel_4","The Sewer 4")},
-                                                              {35,Tuple.Create("SewerLevel_5","The Sewer 5")},
-                                                              {36,Tuple.Create("SewerLevel_6","The Sewer 6")},
-                                                              {37,Tuple.Create("SewerLevel_7","The Sewer 7")},
-                                                              {38,Tuple.Create("SewerLevel_8","The Sewer 8")},
-                                                              {39,Tuple.Create("SewerLevel_9","The Sewer 9")},
-                                                              {40,Tuple.Create("SewerLevel_CutScene2","The Sewer 9.1 level with jumping into a train")},
-                                                              {41,Tuple.Create("SewerLevel_10","The Sewer 10")},
-                                                              {42,Tuple.Create("InternetLevel_CutScene","The Internet cutscene")},
-                                                              {43,Tuple.Create("InternetLevel_1","The Internet 1")},
-                                                              {44,Tuple.Create("InternetLevel_2","The Internet 2")},
-                                                              {45,Tuple.Create("InternetLevel_3","The Internet 3")},
-                                                              {46,Tuple.Create("InternetLevel_4","The Internet 4")},
-                                                              {47,Tuple.Create("InternetLevel_5","The Internet 5")},
-                                                              {48,Tuple.Create("InternetLevel_6","The Internet 6")},
-                                                              {49,Tuple.Create("InternetLevel_7","The Internet 7")},
-                                                              {50,Tuple.Create("InternetLevel_8","The Internet 8")},
-                                                              {51,Tuple.Create("InternetLevel_CutScene2","The Internet 8.1 level with spamming E")},
-                                                              {52,Tuple.Create("PedroBossFightLevel","The End (Pedro Boss Fight)")}};
-    
-    settings.Add("StartGroup", true, "Start Timer At");
-    settings.Add("TutorialLevel_start", true, "Tutorial", "StartGroup");
-    settings.Add("OldTownLevel_start", false, "Old Town", "StartGroup");
-    settings.Add("DistrictNullLevel_start", false, "District Null", "StartGroup");
-    settings.Add("PedroWorldLevel_start", false, "Pedro World", "StartGroup");
-    settings.Add("SewerLevel_start", false, "The Sewer", "StartGroup");
-    settings.Add("InternetLevel_start", false, "The Internet", "StartGroup");
-    settings.Add("PedroBossFightLevel_start", false, "The End", "StartGroup");
-    settings.Add("level_splits", true, "Splits");    
-    foreach (var level in vars.levels) {
-        settings.Add(level.Value.Item1, true, level.Value.Item2, "level_splits");
+    settings.Add("start", true, "Start settings:");
+        settings.Add("s-3", true, "Tutorial", "start");
+        settings.Add("s-6", false, "Old Town", "start");
+        settings.Add("s-15", false, "District Null", "start");
+        settings.Add("s-25", false, "Pedro's World", "start");
+        settings.Add("s-31", false, "The Sewer", "start");
+        settings.Add("s-43", false, "The Internet", "start");
+        settings.Add("s-52", false, "Pedro Fight", "start");
+
+    settings.Add("tutorial", true, "Tutorial");
+        settings.Add("l-3", true, "Level 1", "tutorial");
+        settings.Add("l-4", true, "Level 2", "tutorial");
+        settings.Add("l-5", true, "Level 3", "tutorial");
+    settings.Add("oldtown", true, "Old Town");
+        settings.Add("l-6", true, "Level 1", "oldtown");
+        settings.Add("l-7", true, "Level 2", "oldtown");
+        settings.Add("l-8", true, "Level 3", "oldtown");
+        settings.Add("l-9", true, "Level 4", "oldtown");
+        settings.Add("l-10", true, "Level 5", "oldtown");
+        settings.Add("l-11", true, "Level 6", "oldtown");
+        settings.Add("l-12", true, "Level 7", "oldtown");
+        settings.Add("l-13", true, "Take Motorcycle", "oldtown");
+        settings.Add("l-14", true, "Level 8", "oldtown");
+    settings.Add("districtnull", true, "District Null");
+        settings.Add("l-15", true, "Arrive at District Null", "districtnull");
+        settings.Add("l-16", true, "Level 1", "districtnull");
+        settings.Add("l-17", true, "Level 2", "districtnull");
+        settings.Add("l-18", true, "Level 3", "districtnull");
+        settings.Add("l-19", true, "Level 4", "districtnull");
+        settings.Add("l-20", true, "Level 5", "districtnull");
+        settings.Add("l-21", true, "Level 6", "districtnull");
+        settings.Add("l-22", true, "Level 7", "districtnull");
+        settings.Add("l-23", true, "Level 8", "districtnull");
+        settings.Add("l-24", true, "Level 9", "districtnull");
+    settings.Add("pedrosworld", true, "Pedro's World");
+        settings.Add("l-25", true, "Level 1", "pedrosworld");
+        settings.Add("l-26", true, "Level 2", "pedrosworld");
+        settings.Add("l-27", true, "Level 3", "pedrosworld");
+        settings.Add("l-28", true, "Level 4", "pedrosworld");
+    settings.Add("sewer", true, "The Sewer");
+        settings.Add("l-29", true, "Enter Sewer", "pedrosworld");
+        settings.Add("l-30", true, "Arcade Cutscene", "sewer");
+        settings.Add("l-31", true, "Level 1", "sewer");
+        settings.Add("l-32", true, "Level 2", "sewer");
+        settings.Add("l-33", true, "Level 3", "sewer");
+        settings.Add("l-34", true, "Level 4", "sewer");
+        settings.Add("l-35", true, "Level 5", "sewer");
+        settings.Add("l-36", true, "Level 6", "sewer");
+        settings.Add("l-37", true, "Level 7", "sewer");
+        settings.Add("l-38", true, "Level 8", "sewer");
+        settings.Add("l-39", true, "Level 9", "sewer");
+        settings.Add("l-40", true, "Enter Train", "sewer");
+        settings.Add("l-41", true, "Level 10", "sewer");
+    settings.Add("theinternet", true, "The Internet");
+        settings.Add("l-42", true, "Exit Train", "theinternet");
+        settings.Add("l-43", true, "Level 1", "theinternet");
+        settings.Add("l-44", true, "Level 2", "theinternet");
+        settings.Add("l-45", true, "Level 3", "theinternet");
+        settings.Add("l-46", true, "Level 4", "theinternet");
+        settings.Add("l-47", true, "Level 5", "theinternet");
+        settings.Add("l-48", true, "Level 6", "theinternet");
+        settings.Add("l-49", true, "Level 7", "theinternet");
+        settings.Add("l-50", true, "Level 8", "theinternet");
+        settings.Add("l-51", true, "Resist", "theinternet");
+    settings.Add("theend", true, "The End");
+        settings.Add("l-52", true, "Pedro Fight", "theend");
+
+    vars.TimeFormats = new[]
+    {
+        @"h\:mm\:ss\.ff",
+        @"m\:ss\.ff"
     };
+
+    vars.Helper.AlertGameTime();
 }
 
-init {
-    vars.LTArrayOffset = 0;
-    vars.levelsTimer = new float[55];
-    try {
-        modules.Where(m => m.ModuleName == "steamclient64.dll").First();
-        version = "Steam";
-        vars.LTArrayOffset = 0x688;
-    }
-    catch {
-        version = "Non-Steam";
-        vars.LTArrayOffset = 0x618;
-    }
+init
+{
+    vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
+    {
+        var rss = mono["Assembly-UnityScript", "RootSharedScript"];
+        var uts = mono["Assembly-UnityScript", "UITimerScript"];
+        var tmpt = mono["TextMeshPro-2017.3-Runtime", "TMP_Text"];
+
+        vars.Helper["Level"] = mono.Make<int>(rss, "Instance", "loadingScreenLevelToLoad");
+        vars.Helper["TimeStr"] = mono.MakeString(rss, "Instance", "uiTimer", 0x10, 0x30, 0x10 * 3 + 0x8, 0x28, uts["uiTimerTotal"], tmpt["m_text"]);
+
+        return true;
+    });
 }
 
-split {
-    return old.iLevel != current.iLevel && settings[vars.levels[old.iLevel].Item1];
+update
+{
+    var len = current.TimeStr.Length;
+
+    var min = current.TimeStr.Substring(0, len - 18);
+    var ms = current.TimeStr.Substring(len - 9, 2);
+
+    // This kinda sucks because parsing is slow.
+    // The alternative is finding a pointer to TimeManager.unscaledTime and doing the math ourselves.
+    // But I can't really be bothered to do that right now.
+    current.Time = TimeSpan.ParseExact(min + "." + ms, vars.TimeFormats, System.Globalization.CultureInfo.InvariantCulture);
 }
 
-reset {
-    return current.iLevel == 1;
+start
+{
+    return old.Level != current.Level
+        && settings["s-" + current.Level];
 }
 
-start {
-    vars.TheTotalTime = 0;
-    for (int i = 0; i <= 54; i++) {
-        vars.levelsTimer[i] = 0;
-    }
-    if(settings["TutorialLevel_start"]) {
-        return current.iLevel == 3;
-    }
-    if(settings["OldTownLevel_start"]) {
-        return current.iLevel == 6;
-    }
-    if(settings["DistrictNullLevel_start"]) {
-        return current.iLevel == 16;
-    }
-    if(settings["PedroWorldLevel_start"]) {
-        return current.iLevel == 25;
-    }
-    if(settings["SewerLevel_start"]) {
-        return current.iLevel == 31;
-    }
-    if(settings["InternetLevel_start"]) {
-        return current.iLevel == 43;
-    }
-    if(settings["PedroBossFightLevel_start"]) {
-        return current.iLevel == 52;
-    }
+split
+{
+    return old.Level != current.Level
+        && settings["l-" + old.Level];
 }
 
-isLoading {
+reset
+{
+    return old.Level != current.Level
+        && current.Level == 1;
+}
+
+gameTime
+{
+    return current.Time;
+}
+
+isLoading
+{
     return true;
 }
 
-update {
-    vars.levelsTimer[current.iLevel] = new DeepPointer(
-        "mono.dll", 0x264110, vars.LTArrayOffset, 0x38, current.iLevel * 4 + 0x20).Deref<float>(game);
-    vars.TheTotalTime = 0;
-    vars.TheTotalTime = ((float[])vars.levelsTimer).Sum();
-}
-
-gameTime {
-    return TimeSpan.FromSeconds(vars.TheTotalTime);
-}
-
-exit {
+exit
+{
     timer.IsGameTimePaused = true;
 }
